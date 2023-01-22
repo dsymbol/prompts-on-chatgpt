@@ -8,28 +8,29 @@
 // @resource    jquery-ui https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css
 // @require     https://code.jquery.com/jquery-3.6.0.js
 // @require     https://code.jquery.com/ui/1.13.2/jquery-ui.js
+// @require     https://gist.githubusercontent.com/BrockA/2625891/raw/9c97aa67ff9c5d56be34a55ad6c18a314e5eb548/waitForKeyElements.js
 // @grant       GM_getResourceText
 // @grant       GM_addStyle
 // @grant       GM_xmlhttpRequest
 // ==/UserScript==
 
-GM_addStyle(GM_getResourceText('jquery-ui'));
+waitForKeyElements('textarea', function () {
+    GM_addStyle(GM_getResourceText('jquery-ui'));
 
-var data = JSON.parse(GM_getResourceText('data'));
-var prompts = Object.fromEntries(
-    Object.entries(data).map(([k, v]) => ["/" + k.replaceAll(/[^a-zA-Z0-9\s]/g, "").replaceAll(" ", "_").toLowerCase(), v])
-);
+    var data = JSON.parse(GM_getResourceText('data'));
+    var prompts = Object.fromEntries(
+        Object.entries(data).map(([k, v]) => ["/" + k.replaceAll(/[^a-zA-Z0-9\s]/g, "").replaceAll(" ", "_").toLowerCase(), v])
+    );
 
-function split(val) {
-    return val.split(/\/\s*/);
-}
+    function split(val) {
+        return val.split(/\/\s*/);
+    }
 
-function extractLast(term) {
-    return split(term).pop();
-}
+    function extractLast(term) {
+        return split(term).pop();
+    }
 
-$( "textarea" )
-    .bind("keydown", function (event) {
+    $("textarea").bind("keydown", function (event) {
         if (event.keyCode === $.ui.keyCode.TAB && $(this).data("autocomplete").menu.active) {
             event.preventDefault();
         }
@@ -70,7 +71,8 @@ $( "textarea" )
         }
     });
 
-$( ".ui-autocomplete" ).css({
-    "overflow-y": "scroll",
-    "max-height": "400px"
+    $(".ui-autocomplete").css({
+        "overflow-y": "scroll",
+        "max-height": "300px"
+    });
 });
