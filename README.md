@@ -1,10 +1,14 @@
 # prompts-on-chatgpt
 
-This userscript adds [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) commands to the message text area on ChatGPT.
+<div align="center">
+<img src="https://user-images.githubusercontent.com/88138099/213932957-2c4daf20-3587-4bb8-9c73-9e773b6cc46d.gif"/>
+</div>
+
+UserScript that adds [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) commands to ChatGPT.
 
 ## Installation
 
-Install a userscript manager, such as [Violentmonkey](https://github.com/Violentmonkey/Violentmonkey), then click [here](https://raw.githubusercontent.com/dsymbol/prompts-on-chatgpt/main/poc.user.js).
+Install a userscript manager such as [Violentmonkey](https://github.com/Violentmonkey/Violentmonkey) or [Tampermonkey](https://github.com/Tampermonkey/tampermonkey), then click [here](https://raw.githubusercontent.com/dsymbol/prompts-on-chatgpt/main/poc.user.js) to install the script.
 
 ## Usage
 
@@ -22,3 +26,8 @@ The [default](https://github.com/dsymbol/prompts-on-chatgpt/blob/main/prompts.js
 ```
 
 This will replace the default `prompts.json` file with the one from the specified URL, Please make sure that the JSON file is formatted correctly and accessible to the script.
+
+## Credits
+
+- [f/awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts)
+- [lencx/ChatGPT](https://github.com/lencx/ChatGPT)
