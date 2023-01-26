@@ -9,8 +9,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          persist-credentials: false
+      
       - name: Set up Python 3.10
         uses: actions/setup-python@v3
         with:
@@ -62,4 +61,4 @@ jobs:
         if: ${{ steps.convert.outputs.CONVERT }}
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
