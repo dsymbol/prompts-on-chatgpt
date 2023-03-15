@@ -21,27 +21,12 @@ jobs:
           python -m pip install pandas
 
       - name: Download file
-        working-directory: ./assets
-        run: curl -L -o _prompts.csv https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv
-
-      - name: Check if file changed
-        id: change
-        working-directory: ./assets
-        run: |
-          if cmp --silent _prompts.csv prompts.csv; then
-            echo "No updates"
-          else
-            echo "Updates available"
-            echo "CHANGE=true" >> $GITHUB_OUTPUT
-            mv _prompts.csv prompts.csv
-          fi
+        run: curl -L -o prompts.csv https://raw.githubusercontent.com/f/awesome-chatgpt-prompts/main/prompts.csv
 
       - name: Run converter
         id: convert
-        working-directory: ./assets
-        if: ${{ steps.change.outputs.CHANGE }}
         run: |
-          if python csv2json.py prompts.csv ../prompts.json; then
+          if python ./assets/csv2json.py prompts.csv new_prompts.json; then
             echo "Conversion successful"
             echo "CONVERT=true" >> $GITHUB_OUTPUT
           else
@@ -49,16 +34,28 @@ jobs:
             exit 1
           fi
 
-      - name: Commit files
+      - name: Check if file changed
+        id: change
         if: ${{ steps.convert.outputs.CONVERT }}
+        run: |
+          if cmp --silent prompts.json new_prompts.json; then
+            echo "No updates"
+          else
+            echo "Updates available"
+            echo "CHANGE=true" >> $GITHUB_OUTPUT
+            mv new_prompts.json prompts.json
+          fi
+
+      - name: Commit files
+        if: ${{ steps.change.outputs.CHANGE }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add ./assets/prompts.csv prompts.json
+          git add prompts.json
           git commit -m "update prompts"
 
       - name: Push changes
-        if: ${{ steps.convert.outputs.CONVERT }}
+        if: ${{ steps.change.outputs.CHANGE }}
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
