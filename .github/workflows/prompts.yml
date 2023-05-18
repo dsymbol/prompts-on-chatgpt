@@ -1,7 +1,9 @@
 name: Update Prompts
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 1 * *'
 
 jobs:
   update:
