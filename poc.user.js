@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        prompts-on-chatgpt
-// @match       *://chat.openai.com/chat*
+// @match       *://chat.openai.com/*
 // @icon        https://raw.githubusercontent.com/dsymbol/prompts-on-chatgpt/main/assets/favicon.png
 // @author      dsymbol
 // @run-at      document-end
