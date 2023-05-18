@@ -1,8 +1,6 @@
 # prompts-on-chatgpt
 
-<div align="center">
-<img src="https://user-images.githubusercontent.com/88138099/213932957-2c4daf20-3587-4bb8-9c73-9e773b6cc46d.gif"/>
-</div>
+![](https://github.com/dsymbol/prompts-on-chatgpt/assets/88138099/0e0972da-d046-408e-b728-16ad68acbbd8)
 
 UserScript that adds [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) commands to ChatGPT.
 
